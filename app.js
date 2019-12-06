@@ -68,6 +68,6 @@ app.get('/api/shorturl/:urlToForward', (req, res, next) => {
 })
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('Everything is working!!!')
 })
