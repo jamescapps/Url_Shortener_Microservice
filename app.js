@@ -32,7 +32,7 @@ app.post("/api/shorturl/new", function(req, res) {
     //Checks to see if  url is valid.
         dns.lookup(formattedUrl, (err) => {
             if (err) {
-                res.json({"error":"invalid URL"})
+                res.json({'error':'invalid URL'})
             } else {
                 //Random number for short url.
                 var randomShort = Math.floor(Math.random() * 1000).toString()
@@ -52,7 +52,7 @@ app.post("/api/shorturl/new", function(req, res) {
             }
         })
     } else {
-        res.json({"error":"invalid URL"})
+        res.json({'error':'invalid URL'})
     }
 })
 
