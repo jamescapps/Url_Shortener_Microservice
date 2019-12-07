@@ -14,7 +14,7 @@ app.use(cors())
 app.use('/public', express.static(process.cwd() + '/public'))
 
 //Connect to database.
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
 
 //Links index.html page.
 app.get('/', function(req, res){
@@ -25,10 +25,10 @@ app.get('/', function(req, res){
 app.post("/api/shorturl/new", function(req, res) {
     var urlInput= req.body.url
     var regexURL = new RegExp("^(http|https)://", "i")
-    var formattedUrl = urlInput.replace(/(^\w+:|^)\/\//, '')
+    var formattedUrl = urlInput.replace(/(^\w+:|^)\/\//, '').split('/')[0]
     //fcc tests want urls to only start with http:// or https://.  This tests to make sure they do.  All other input is invalid.
     if (regexURL.test(urlInput)) {
-    //fcc also wanted us to use dns.lookup, however any url with http:// or https:// returned invalid.  So the formattedUrl regex removes that.
+    //fcc also wanted us to use dns.lookup, however any url with http:// or https:// returned invalid.  So the formattedUrl regex removes that, as well as any routes.
     //Checks to see if  url is valid.
         dns.lookup(formattedUrl, (err) => {
             if (err) {
@@ -68,6 +68,6 @@ app.get('/api/shorturl/:urlToForward', (req, res, next) => {
 })
 
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('Everything is working!!!')
 })
