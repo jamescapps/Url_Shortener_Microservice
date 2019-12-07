@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const urlSchema = new Schema(
     {
@@ -8,6 +8,6 @@ const urlSchema = new Schema(
     }
 )
 
-const modelClass = mongoose.model('modelUrl', urlSchema);
+const modelClass = mongoose.model('modelUrl', urlSchema)
 
-module.exports = modelClass;
+module.exports = modelClass
